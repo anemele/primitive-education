@@ -5,12 +5,9 @@
   size: 24pt,
 )
 
-#let today = datetime.today().display("[year]-[month]-[day]")
-
 #set align(center)
-#title(
-  today + "算数题",
-)
+#let today = datetime.today().display("[year]-[month]-[day]")
+#title(today)
 #block()
 
 #set align(left)
