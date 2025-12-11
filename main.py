@@ -10,20 +10,23 @@ STATIC_PATH.mkdir(exist_ok=True)
 
 def main():
     today = date.today().strftime("%Y-%m-%d")
-    qf = STATIC_PATH.joinpath(f"{today}.pdf")
+
+    static_path = STATIC_PATH
+    qf = static_path.joinpath(f"{today}.pdf")
 
     if qf.exists():
         print(qf)
         return
 
-    data_path = STATIC_PATH.joinpath("data.csv")
+    data_path = static_path.joinpath("data.csv")
     with open(data_path, "w", encoding="utf-8") as fp:
         fp.write("\n".join(f"{q},{a}" for q, a in gen_data()))
 
-    tmpl = STATIC_PATH.joinpath("tmpl.typ")
+    tmpl = static_path.joinpath("tmpl.typ")
     cmd = f"typst compile {tmpl} --input".split()
 
-    run([*cmd, "show_ans=true", f"{today}-ans.pdf"])
+    qaf = static_path.joinpath(f"{today}-ans.pdf")
+    run([*cmd, "show_ans=true", qaf])
     run([*cmd, "show_ans=false", qf])
     print(qf)
 

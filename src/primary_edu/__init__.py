@@ -10,7 +10,7 @@ OP_FN = (
     gen_mul,
     partial(gen_div, must_divmod=True, must_frac=True),
 )
-OP_NUM = (6, 8, 2, 4)
+OP_NUM = (6, 6, 4, 4)
 
 
 def gen_data():
